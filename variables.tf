@@ -9,15 +9,15 @@ variable "notification_email" {
 }
 
 variable "cpu_threshold" {
-  default = 85
+  type = number
 }
 
 variable "evaluation_periods" {
-  default = 5
+  type = number
 }
 
 variable "datapoints_to_alarm" {
-  default = 3
+  type = number
 }
 
 variable "period" {
