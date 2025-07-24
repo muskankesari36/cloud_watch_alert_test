@@ -3,7 +3,12 @@ variable "ec2_instance_ids" {
   default = [] 
 }
 
-variable "notification_email" {
+variable "system_check_email" {
   type    = string
-  default = "" 
+  default = ""
+}
+
+variable "instance_check_email" {
+  type    = string
+  default = ""
 }

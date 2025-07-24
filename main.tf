@@ -38,13 +38,24 @@ resource "aws_cloudwatch_metric_alarm" "instance_check" {
   ok_actions    = [aws_sns_topic.ec2_alarms.arn]
 }
 
-resource "aws_sns_topic" "ec2_alarms" {
-  name = "ec2-status-check-alarms"
+# System Check SNS
+resource "aws_sns_topic" "system_alerts" {
+  name = "ec2-system-check-alerts"
 }
 
-# Subscribe email to SNS topic
-resource "aws_sns_topic_subscription" "email" {
-  topic_arn = aws_sns_topic.ec2_alarms.arn
+resource "aws_sns_topic_subscription" "system_email" {
+  topic_arn = aws_sns_topic.system_alerts.arn
   protocol  = "email"
-  endpoint  = var.notification_email
+  endpoint  = var.system_check_email
+}
+
+# Instance Check SNS
+resource "aws_sns_topic" "instance_alerts" {
+  name = "ec2-instance-check-alerts"
+}
+
+resource "aws_sns_topic_subscription" "instance_email" {
+  topic_arn = aws_sns_topic.instance_alerts.arn
+  protocol  = "email"
+  endpoint  = var.instance_check_email
 }
